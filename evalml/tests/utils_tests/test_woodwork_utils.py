@@ -8,7 +8,7 @@ from woodwork.logical_types import URL, Categorical, Double, Integer, Unknown
 
 from evalml.utils import (
     _convert_numeric_dataset_pandas,
-    _schema_is_equal,
+    schema_is_equal,
     infer_feature_types,
 )
 
@@ -255,7 +255,7 @@ def test_schema_is_equal(semantic_tags, s_equal, logical_types, l_equal):
         logical_types=logical_types,
         semantic_tags=semantic_tags,
     )
-    res = _schema_is_equal(schema, schema_other)
+    res = schema_is_equal(schema, schema_other)
     assert res == (l_equal and s_equal)
 
 
@@ -270,11 +270,11 @@ def test_schema_is_equal_column_names():
         logical_types={"first": Categorical(), "second": Integer()},
         semantic_tags={"first": [], "second": ["numeric"]},
     )
-    assert not _schema_is_equal(schema, schema2)
+    assert not schema_is_equal(schema, schema2)
 
 
 def test_schema_is_equal_fraud(fraud_100):
     X, y = fraud_100
     X2 = X.copy()
     X2.ww.init()
-    assert _schema_is_equal(X.ww.schema, X2.ww.schema)
+    assert schema_is_equal(X.ww.schema, X2.ww.schema)

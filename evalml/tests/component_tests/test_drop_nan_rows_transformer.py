@@ -7,7 +7,7 @@ from woodwork import init_series
 from evalml.pipelines.components.transformers.preprocessing import (
     DropNaNRowsTransformer,
 )
-from evalml.utils.woodwork_utils import _schema_is_equal
+from evalml.utils.woodwork_utils import schema_is_equal
 
 
 def test_drop_rows_transformer():
@@ -58,5 +58,5 @@ def test_drop_rows_transformer_retain_ww_schema(null_value):
     transformed_X, transformed_y = drop_rows_transformer.fit_transform(X, y)
     assert_frame_equal(transformed_X, X_expected)
     assert_series_equal(transformed_y, y_expected)
-    assert _schema_is_equal(transformed_X.ww.schema, X_expected_schema)
+    assert schema_is_equal(transformed_X.ww.schema, X_expected_schema)
     assert transformed_y.ww.schema == y_expected_schema

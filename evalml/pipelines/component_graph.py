@@ -16,7 +16,7 @@ from evalml.exceptions.exceptions import (
 from evalml.pipelines.components import ComponentBase, Estimator, Transformer
 from evalml.pipelines.components.utils import handle_component_class
 from evalml.utils import (
-    _schema_is_equal,
+    schema_is_equal,
     get_logger,
     import_or_raise,
     infer_feature_types,
@@ -405,7 +405,7 @@ class ComponentGraph:
                 if "DFS Transformer" in self.compute_order
                 else X.ww.schema
             )
-            if not _schema_is_equal(X_schema, self._input_types):
+            if not schema_is_equal(X_schema, self._input_types):
                 raise ValueError(
                     "Input X data types are different from the input types the pipeline was fitted on."
                 )

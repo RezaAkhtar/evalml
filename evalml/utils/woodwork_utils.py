@@ -94,7 +94,7 @@ def _convert_numeric_dataset_pandas(X, y):
     return X_ww, y_ww
 
 
-def _schema_is_equal(first, other):
+def schema_is_equal(first, other):
     """Loosely check whether or not the Woodwork schemas are equivalent. This only checks that the string values for the schemas are equal and doesn't take the actual type objects into account.
 
     Args:
