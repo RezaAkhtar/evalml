@@ -103,6 +103,7 @@ class SimpleImputer(Transformer):
         X = infer_feature_types(X)
         original_schema = X.ww.schema
 
+        # TODO: Question here, now that we support BooleanNullable, what is this supposed to look like?
         # Return early since bool dtype doesn't support nans and sklearn errors if all cols are bool
         if (X.dtypes == bool).all():
             return X

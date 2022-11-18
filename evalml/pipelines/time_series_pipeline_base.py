@@ -156,7 +156,9 @@ class TimeSeriesPipelineBase(PipelineBase, metaclass=PipelineBaseMeta):
             X.index.name = index_name
             y = y.set_axis(X[self.time_index])
             X.ww.init(schema=X_schema)
-            y.ww.init(schema=y_schema)
+            # TODO: using infer_feature_types works here because of the checks on Series, but we lose the y_schema
+            # y.ww.init(schema=y_schema)
+            y = infer_feature_types(y)
             if X.ww.schema is not None:
                 X = X.ww.drop([self.time_index])
             else:

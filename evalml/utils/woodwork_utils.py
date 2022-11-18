@@ -68,6 +68,11 @@ def infer_feature_types(data, feature_types=None):
         if all(data.isna()):
             data = data.replace(pd.NA, np.nan)
             feature_types = "Double"
+        elif all(
+            type(value) not in [bool, np.bool_] and (value == 1 or value == 0)
+            for value in set(data.values)
+        ):
+            feature_types = "Integer"
         return ww.init_series(data, logical_type=feature_types)
     else:
         ww_data = data.copy()
